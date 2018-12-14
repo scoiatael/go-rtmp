@@ -16,7 +16,7 @@ func main() {
 	defer client.Close()
 	log.Infof("Client created")
 
-	if err := client.Connect(); err != nil {
+	if err := client.Connect(""); err != nil {
 		log.Infof("Failed to connect: Err=%+v", err)
 	}
 	log.Infof("connected")

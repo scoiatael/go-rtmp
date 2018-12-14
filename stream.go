@@ -57,7 +57,7 @@ func (s *Stream) WriteUserCtrl(chunkStreamID int, timestamp uint32, msg *message
 }
 
 // TODO: return server response
-func (s *Stream) Connect() (*message.NetConnectionConnectResult, error) {
+func (s *Stream) Connect(app string) (*message.NetConnectionConnectResult, error) {
 	transactionID := int64(1) // Always 1 (7.2.1.1)
 	t, err := s.transactions.Create(transactionID)
 	if err != nil {
@@ -69,7 +69,11 @@ func (s *Stream) Connect() (*message.NetConnectionConnectResult, error) {
 		chunkStreamID, 0, // Timestamp is 0
 		"connect",
 		transactionID,
-		&message.NetConnectionConnect{},
+		&message.NetConnectionConnect{
+			message.NetConnectionConnectCommand{
+				App: app,
+			},
+		},
 	)
 	if err != nil {
 		return nil, err

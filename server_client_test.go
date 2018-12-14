@@ -26,7 +26,7 @@ func TestServerCanAcceptConnect(t *testing.T) {
 	}
 
 	prepareConnection(t, config, func(c *ClientConn) {
-		err := c.Connect()
+		err := c.Connect("")
 		assert.Nil(t, err)
 	})
 }
@@ -42,7 +42,7 @@ func TestServerCanRejectConnect(t *testing.T) {
 	}
 
 	prepareConnection(t, config, func(c *ClientConn) {
-		err := c.Connect()
+		err := c.Connect("")
 		assert.Equal(t, &ConnectRejectedError{
 			TransactionID: 1,
 			Result: &message.NetConnectionConnectResult{
@@ -80,7 +80,7 @@ func TestServerCanAcceptCreateStream(t *testing.T) {
 	}
 
 	prepareConnection(t, config, func(c *ClientConn) {
-		err := c.Connect()
+		err := c.Connect("")
 		assert.Nil(t, err)
 
 		s0, err := c.CreateStream()

@@ -58,7 +58,7 @@ func (cc *ClientConn) LastError() error {
 	return cc.lastErr
 }
 
-func (cc *ClientConn) Connect() error {
+func (cc *ClientConn) Connect(app string) error {
 	if err := cc.controllable(); err != nil {
 		return err
 	}
@@ -68,7 +68,7 @@ func (cc *ClientConn) Connect() error {
 		return err
 	}
 
-	result, err := stream.Connect()
+	result, err := stream.Connect(app)
 	if err != nil {
 		return err // TODO: wrap an error
 	}
